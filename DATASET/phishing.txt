@@ -1,0 +1,19 @@
+# phishing.txt
+# Pattern untuk deteksi phishing (permintaan OTP/PIN)
+
+REGEX_PATTERN:
+\b(otp|kode\s*verifikasi|verification\s*code|pin)\b.*\b(kirim|send|share|kasih)\b|\b(kirim|send|share|kasih)\b.*\b(otp|pin)\b
+
+WEIGHT: 2.0
+
+DESCRIPTION:
+Detects phishing attempts (requesting OTP, PIN, verification codes)
+
+EXAMPLES:
+- otp nya berapa?
+- kirim otp
+- kode verifikasi
+- verification code
+- kirim pin
+- share otp
+

@@ -1,0 +1,23 @@
+# threats.txt
+# Pattern untuk deteksi ancaman
+
+REGEX_PATTERN:
+\b(gua\s*bunuh|tak\s*bunuh|mati\s*aja|hajar|gebuk|bacok|tembak|laporin|sebar(in)?)\b
+
+WEIGHT: 1.4
+
+DESCRIPTION:
+Detects threats and violent language
+
+EXAMPLES:
+- gua bunuh
+- tak bunuh
+- mati aja
+- hajar
+- gebuk
+- bacok
+- tembak
+- laporin
+- sebar
+- sebarin
+

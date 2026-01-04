@@ -1,0 +1,23 @@
+# invitation.txt
+# Pattern untuk deteksi ajakan/undangan seksual
+
+REGEX_PATTERN:
+\b(ml|make\s*love|sange|horny|sangean|main\s*yuk|ayo\s*(sex|seks)|ngamar|ons|hookup)\b
+
+WEIGHT: 1.4
+
+DESCRIPTION:
+Detects sexual invitations and propositions
+
+EXAMPLES:
+- ml
+- make love
+- sange
+- horny
+- sangean
+- main yuk
+- ayo sex
+- ngamar
+- ons
+- hookup
+

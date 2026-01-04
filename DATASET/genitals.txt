@@ -1,0 +1,32 @@
+# genitals.txt
+# Pattern untuk deteksi kata-kata organ genital
+
+REGEX_PATTERN:
+\b(kontol+|memek+|pepek+|titit+|penis|vagina|pussy|dick|cock|boobs+|tetek+|tete+|payudara|g[-\s]*spot|gspot)\b
+
+WEIGHT: 1.7
+
+DESCRIPTION:
+Detects genital terms and sexual anatomy
+
+EXAMPLES:
+- kontol
+- kontoll
+- memek
+- memekk
+- pepek
+- titit
+- penis
+- vagina
+- pussy
+- dick
+- cock
+- boobs
+- boobss
+- tetek
+- tete
+- payudara
+- g-spot
+- g spot
+- gspot
+

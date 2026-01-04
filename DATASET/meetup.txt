@@ -1,0 +1,19 @@
+# meetup.txt
+# Pattern untuk deteksi ajakan ketemu/meetup
+
+REGEX_PATTERN:
+\b(ketemu|meet|ngopi|jalan|hangout|main)\s*(yuk|ayo)?\b
+
+WEIGHT: 0.9
+
+DESCRIPTION:
+Detects meeting/meetup invitations
+
+EXAMPLES:
+- ketemu yuk
+- meet up
+- ngopi
+- jalan-jalan
+- hangout
+- main yuk
+

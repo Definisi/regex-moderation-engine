@@ -1,0 +1,17 @@
+# sexual_harass_combo.txt
+# Pattern untuk deteksi kombinasi konten seksual dengan target
+
+REGEX_PATTERN:
+\b(kontol|memek|tetek|bugil|nude)\b.*\b(kamu|lu|elo)\b|\b(kamu|lu|elo)\b.*\b(kontol|memek|tetek|bugil|nude)\b
+
+WEIGHT: 1.2
+
+DESCRIPTION:
+Detects sexual harassment combinations (sexual terms + target pronouns)
+
+EXAMPLES:
+- kontol kamu
+- kamu memek
+- lu bugil
+- nude elo
+

@@ -1,0 +1,41 @@
+# ask_contact.txt
+# Pattern untuk deteksi permintaan kontak/nomor/WA/Telegram dll
+
+REGEX_PATTERN:
+\b(minta|boleh|kasih|drop|ada)\s*(nomor|no\.?|wa|kontak|telegram|tele|line|ig)\b|\b(kontak)\s*(lain|luar|lainnya)?\b
+
+WEIGHT: 1.1
+
+DESCRIPTION:
+Detects requests for contact information (phone number, WA, Telegram, Line, IG)
+
+EXAMPLES:
+- minta nomor
+- boleh wa?
+- kasih kontak
+- drop telegram
+- ada line?
+- kontak lain
+- kontak luar
+- kontak lainnya
+- minta nomor dong
+- boleh kasih wa?
+- bisa kasih kontak?
+- ada telegram?
+- punya line?
+- kontak lu berapa?
+- nomor kamu berapa?
+- wa lu berapa?
+- telegram lu apa?
+- line lu apa?
+- ig lu apa?
+- boleh minta nomor?
+- kasih nomor dong
+- drop nomor
+- share kontak
+- kirim nomor
+- ada kontak lain?
+- punya kontak lain?
+- kontak selain ini
+- kontak di luar aplikasi ini
+

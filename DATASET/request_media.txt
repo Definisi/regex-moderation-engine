@@ -1,0 +1,33 @@
+# request_media.txt
+# Pattern untuk deteksi permintaan foto/video eksplisit
+
+REGEX_PATTERN:
+\b(kirim(in)?|send|share)\s*(foto|video)?\s*(bugil|nude|telanjang)\b
+
+WEIGHT: 1.5
+
+DESCRIPTION:
+Detects requests for explicit media (nude photos/videos)
+
+EXAMPLES:
+- kirim nude
+- kirimin nude
+- send nude
+- share foto bugil
+- kirim video telanjang
+- minta nude
+- kasih nude
+- tolong kirim nude
+- bantu kirim nude
+- kirim foto nude
+- send foto bugil
+- share video telanjang
+- minta foto nude
+- kasih foto bugil
+- kirim gambar nude
+- send gambar telanjang
+- share pic nude
+- kirim pic bugil
+- tolong kirim foto nude
+- bantu kasih video bugil
+

@@ -1,0 +1,126 @@
+# context_patterns.txt
+# Pattern Context-Aware untuk deteksi yang memerlukan konteks sebelum/sesudah
+
+========================================
+PATTERN: context_sexual_request
+========================================
+REGEX_PATTERN:
+\b(kirim|send|share|minta|kasih|tolong|bantu)\s*(.+?)?\s*(nude|bugil|telanjang|foto|video|gambar)\b
+
+WEIGHT: 1.3
+
+DESCRIPTION:
+Detects requests for explicit media with context (verbs before, media terms after)
+
+EXAMPLES:
+- kirim nude dong
+- tolong kirim foto nude
+- bantu kasih video bugil
+- minta foto telanjang
+- kasih gambar nude
+- send pic bugil
+- tolong kirim dong foto nude
+- bantu kasih ya video bugil
+- minta tolong send gambar telanjang
+- bantu dong kirim pic nude
+- tolong ya share foto bugil
+
+NOTES:
+- Pattern ini melihat konteks: verb (kirim/send/minta) + optional middle + media term (nude/bugil/foto/video)
+- Lebih akurat daripada pattern sederhana karena memerlukan konteks lengkap
+
+========================================
+PATTERN: context_sexual_activity
+========================================
+REGEX_PATTERN:
+\b(mau|pengen|ingin|minta)\s*(.+?)?\s*(sex|seks|ngentot|entot|ml|make\s*love)\b
+
+WEIGHT: 1.4
+
+DESCRIPTION:
+Detects expressions of desire for sexual activity (must have desire word + sexual term)
+
+EXAMPLES:
+- mau sex nih
+- pengen seks
+- ingin ngentot
+- minta ml
+- mau make love
+- pengen sex bareng
+- mau banget sex
+- pengen sekali seks
+- ingin banget ngentot
+- minta ml dong
+- mau make love nih
+- pengen sex bareng yuk
+- mau sex sekarang
+- pengen seks nanti
+- ingin ngentot besok
+- mau ml malam ini
+- pengen sex hari ini
+
+NOTES:
+- Pattern ini melihat konteks: desire word (mau/pengen/ingin) + optional middle + sexual term
+- Membedakan antara "mau sex" (bermasalah) vs "sex education" (tidak masalah)
+
+========================================
+PATTERN: context_transaction
+========================================
+REGEX_PATTERN:
+\b(bayar|transfer|kirim|kasih)\s*(.+?)?\s*(uang|duit|money|rp|rupiah|juta|rb|ribu|jt)\b
+
+WEIGHT: 1.2
+
+DESCRIPTION:
+Detects transactional language with money context (payment verbs + money terms)
+
+EXAMPLES:
+- bayar 500rb
+- transfer 1 juta
+- kirim uang 2jt
+- kasih duit 500rb
+- bayar per jam
+- transfer dulu
+- kirim rupiah
+- kasih money dong
+- bayar dulu 500rb
+- transfer sekarang 1 juta
+- kirim uang dulu 2jt
+- kasih duit sekarang 500rb
+- bayar per jam dong
+- transfer dulu ya
+- kirim rupiah sekarang
+- bayar sekarang 500rb
+- transfer nanti 1 juta
+- kirim uang besok 2jt
+- kasih duit hari ini 500rb
+
+NOTES:
+- Pattern ini melihat konteks: payment verb (bayar/transfer/kirim) + money term
+- Sering digunakan dalam konteks transactional/modus encounters
+
+========================================
+PENTING: Context-Aware Pattern
+========================================
+
+Pattern context-aware adalah pattern yang memerlukan konteks sebelum/sesudah kata kunci.
+
+Alasan menggunakan context-aware:
+1. Mengurangi false positive
+   - "nude art" vs "kirim nude" - yang kedua lebih bermasalah
+   - "sex education" vs "mau sex" - yang kedua lebih bermasalah
+
+2. Meningkatkan akurasi
+   - Memerlukan kombinasi kata untuk trigger
+   - Lebih spesifik dan targeted
+
+3. Handle variasi bahasa natural
+   - "kirim nude dong" (dengan filler word)
+   - "tolong kirim foto nude" (dengan polite word)
+   - "mau sex nih" (dengan particle)
+
+Penggunaan:
+- Gunakan pattern context-aware untuk kata-kata yang bisa ambigu
+- Combine dengan pattern sederhana untuk coverage yang lebih baik
+- Weight context-aware biasanya sedikit lebih rendah karena lebih spesifik
+

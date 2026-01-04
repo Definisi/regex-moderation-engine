@@ -1,0 +1,210 @@
+# context_rules.txt
+# Dokumentasi Context Checking Rules (Semi-LLM Rule-Based)
+
+Sistem context checking menggunakan if-else logic untuk mengecek konteks sebelum/sesudah pattern yang terdeteksi.
+
+## Cara Kerja
+
+1. Ketika pattern terdeteksi (misalnya "nude", "sex", dll)
+2. Sistem cek context sebelum/sesudah pattern tersebut
+3. Jika context match rule -> adjust weight atau exclude
+4. Jika context exclude found -> reduce weight atau skip flagging
+
+## Context Rules
+
+### 1. NUDE + EXCLUDE_AFTER (art, photography, etc)
+```
+IF pattern = "nude|bugil|telanjang"
+AND AFTER = "art|photography|drawing|painting|sculpture|museum"
+THEN:
+  - weight_adjust = -0.5 (reduce weight)
+  - should_flag = False (don't flag)
+  
+Examples yang TIDAK akan di-flag:
+- nude art
+- nude photography
+- nude drawing
+- nude painting
+```
+
+### 2. NUDE + CONTEXT_BEFORE (kirim, send, share, etc)
+```
+IF pattern = "nude|bugil|telanjang"
+AND BEFORE = "kirim|send|share|minta|kasih|tolong|bantu"
+THEN:
+  - weight_adjust = +0.3 (increase weight)
+  - should_flag = True (must flag)
+  
+Examples yang AKAN di-flag:
+- kirim nude
+- send nude
+- minta foto nude
+- tolong kirim nude
+```
+
+### 3. SEX + EXCLUDE_AFTER (education, health)
+```
+IF pattern = "sex|seks"
+AND AFTER = "education|edukasi|pelajaran|health|kesehatan"
+THEN:
+  - weight_adjust = -0.5 (reduce weight)
+  - should_flag = False (don't flag)
+  
+Examples yang TIDAK akan di-flag:
+- sex education
+- sex health
+- seks edukasi
+```
+
+### 4. SEX + CONTEXT_BEFORE (mau, pengen, ingin)
+```
+IF pattern = "sex|seks|ngentot"
+AND BEFORE = "mau|pengen|ingin|minta"
+THEN:
+  - weight_adjust = +0.4 (increase weight)
+  - should_flag = True (must flag)
+  
+Examples yang AKAN di-flag:
+- mau sex
+- pengen seks
+- ingin ngentot
+- minta sex
+```
+
+### 5. ADULT + CONTEXT_AFTER (content, only, 18+)
+```
+IF pattern = "dewasa|adult"
+AND AFTER = "content|only|18+|18plus"
+THEN:
+  - weight_adjust = +0.3 (increase weight)
+  - should_flag = True (must flag)
+  
+Examples yang AKAN di-flag:
+- adult content
+- dewasa only
+- adult 18+
+```
+
+### 6. ADULT + EXCLUDE_AFTER (education)
+```
+IF pattern = "dewasa|adult"
+AND AFTER = "education|edukasi|pelajaran"
+THEN:
+  - weight_adjust = -0.4 (reduce weight)
+  - should_flag = False (don't flag)
+  
+Examples yang TIDAK akan di-flag:
+- adult education
+- pendidikan dewasa
+```
+
+### 7. PLATFORM + CONTEXT_BEFORE (pindah, lanjut)
+```
+IF pattern = "wa|telegram|line|whatsapp"
+AND BEFORE = "pindah|lanjut|move"
+THEN:
+  - weight_adjust = +0.2 (increase weight)
+  - should_flag = True (must flag)
+  
+Examples yang AKAN di-flag:
+- pindah wa
+- lanjut telegram
+- move to line
+```
+
+### 8. MONEY + CONTEXT_BEFORE (bayar, transfer, kirim)
+```
+IF pattern = "juta|rb|ribu|rupiah|uang|duit"
+AND BEFORE = "bayar|transfer|kirim|kasih"
+THEN:
+  - weight_adjust = +0.3 (increase weight)
+  - should_flag = True (must flag)
+  
+Examples yang AKAN di-flag:
+- bayar 500rb
+- transfer 1 juta
+- kirim uang 2jt
+```
+
+### 9. CONTACT + CONTEXT_BEFORE (minta, boleh, kasih)
+```
+IF pattern = "nomor|wa|kontak|telegram|line"
+AND BEFORE = "minta|boleh|kasih|drop|ada"
+THEN:
+  - weight_adjust = +0.2 (increase weight)
+  - should_flag = True (must flag)
+  
+Examples yang AKAN di-flag:
+- minta nomor
+- boleh wa
+- kasih kontak
+```
+
+### 10. HOTEL/ROOM + CONTEXT_BEFORE (ketemu, meet)
+```
+IF pattern = "hotel|kamar|kosan|apartemen"
+AND BEFORE = "ketemu|meet|ngopi|jalan"
+THEN:
+  - weight_adjust = +0.2 (increase weight)
+  - should_flag = True (must flag)
+  
+Examples yang AKAN di-flag:
+- ketemu hotel
+- meet di kamar
+- ngopi di apartemen
+```
+
+## Implementasi
+
+Context checking dilakukan di `context_checker.py` dengan class `ContextChecker`.
+
+Setiap rule memiliki:
+- `trigger_pattern`: Pattern yang trigger context check
+- `context_before`: List pattern yang harus ada SEBELUM trigger
+- `context_after`: List pattern yang harus ada SESUDAH trigger
+- `exclude_before`: List pattern yang TIDAK boleh ada sebelum
+- `exclude_after`: List pattern yang TIDAK boleh ada sesudah
+- `weight_adjust`: Adjustment untuk weight jika context match
+- `should_flag`: Apakah harus flag jika context match
+
+## Logika If-Else
+
+```
+FOR each matched pattern:
+  FOR each context rule:
+    IF trigger_pattern match:
+      IF context_before required:
+        IF NOT context_before found:
+          CONTINUE (skip rule)
+      
+      IF context_after required:
+        IF NOT context_after found:
+          CONTINUE (skip rule)
+      
+      IF exclude_before found:
+        RETURN invalid (reduce weight, don't flag)
+      
+      IF exclude_after found:
+        RETURN invalid (reduce weight, don't flag)
+      
+      RETURN valid (adjust weight, flag if should_flag)
+  
+  RETURN default (valid, no adjust)
+```
+
+## Keuntungan
+
+1. Mengurangi False Positive
+   - "nude art" tidak akan di-flag
+   - "sex education" tidak akan di-flag
+   - "adult education" tidak akan di-flag
+
+2. Meningkatkan True Positive
+   - "kirim nude" akan di-flag dengan weight lebih tinggi
+   - "mau sex" akan di-flag dengan weight lebih tinggi
+   - "bayar 500rb" akan di-flag dengan weight lebih tinggi
+
+3. Context-Aware
+   - Sistem memahami konteks sebelum/sesudah pattern
+   - Lebih akurat daripada pattern matching sederhana
+

@@ -1,0 +1,19 @@
+# hotel_room.txt
+# Pattern untuk deteksi mention hotel/kamar
+
+REGEX_PATTERN:
+\b(hotel|kamar|kosan|apart|apartemen|nginep)\b
+
+WEIGHT: 0.9
+
+DESCRIPTION:
+Detects hotel/room mentions (often associated with transactional encounters)
+
+EXAMPLES:
+- hotel
+- kamar
+- kosan
+- apart
+- apartemen
+- nginep
+

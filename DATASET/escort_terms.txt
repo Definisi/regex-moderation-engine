@@ -1,0 +1,23 @@
+# escort_terms.txt
+# Pattern untuk deteksi istilah escort/jasa seksual
+
+REGEX_PATTERN:
+\b(open\s*bo|open\s*booking|booking|avail|short\s*time|long\s*time|st|lt|pijat\s*plusplus|plus\s*plus)\b
+
+WEIGHT: 1.6
+
+DESCRIPTION:
+Detects escort and transactional sexual service terms
+
+EXAMPLES:
+- open bo
+- open booking
+- booking
+- avail
+- short time
+- long time
+- st
+- lt
+- pijat plusplus
+- plus plus
+

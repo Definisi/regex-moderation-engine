@@ -1,0 +1,51 @@
+# rates_money.txt
+# Pattern untuk deteksi tarif/rate/uang/jasa
+
+REGEX_PATTERN:
+\b(per\s*jam(nya)?|perjam(nya)?|per\s*malam(nya)?|permalam(nya)?|tarif|rate|bayar|fee|jasa|transfer|tf|gopay|dana|ovo|rekening)\b
+
+WEIGHT: 1.3
+
+DESCRIPTION:
+Detects rates, money, payment, and transactional terms
+
+EXAMPLES:
+- per jam
+- perjam
+- per jamnya
+- perjamnya
+- per malam
+- permalam
+- tarif
+- rate
+- bayar
+- fee
+- jasa
+- transfer
+- tf
+- gopay
+- dana
+- ovo
+- rekening
+
+CONTEXT EXAMPLES (must check context):
+- bayar 500rb
+- transfer 1 juta
+- kirim uang 2jt
+- kasih duit 500rb
+- bayar per jam
+- transfer dulu
+- kirim rupiah
+- kasih money dong
+- bayar sekarang 500rb
+- transfer nanti 1 juta
+- kirim uang besok 2jt
+- kasih duit hari ini 500rb
+- bayar dulu 500rb
+- transfer sekarang 1 juta
+- kirim uang dulu 2jt
+- kasih duit sekarang 500rb
+- bayar per jam dong
+- transfer dulu ya
+- kirim rupiah sekarang
+

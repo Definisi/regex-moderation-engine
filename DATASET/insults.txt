@@ -1,0 +1,24 @@
+# insults.txt
+# Pattern untuk deteksi kata kasar/insult
+
+REGEX_PATTERN:
+\b(anjing|bangsat|kontol|memek|bego|tolol|goblok|brengsek|ngentod|asu|kampret)\b
+
+WEIGHT: 1.5
+
+DESCRIPTION:
+Detects insults and offensive language
+
+EXAMPLES:
+- anjing
+- bangsat
+- kontol
+- memek
+- bego
+- tolol
+- goblok
+- brengsek
+- ngentod
+- asu
+- kampret
+

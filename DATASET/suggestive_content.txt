@@ -1,0 +1,20 @@
+# suggestive_content.txt
+# Pattern untuk deteksi konten suggestif/seksi
+
+REGEX_PATTERN:
+\b(dirty|hot|seksi|sexy|mesum|nakal|kotor)\b
+
+WEIGHT: 0.9
+
+DESCRIPTION:
+Detects suggestive but not explicitly sexual content
+
+EXAMPLES:
+- dirty
+- hot
+- seksi
+- sexy
+- mesum
+- nakal
+- kotor
+

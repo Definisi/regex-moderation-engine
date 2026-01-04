@@ -1,0 +1,161 @@
+# MODEL.txt
+# Comprehensive Regex Pattern Model for Chat Moderation
+# Indonesia-focused multi-label moderation scorer
+
+========================================
+CATEGORY: SEXUAL CONTENT
+========================================
+
+--- explicit_acts ---
+Pattern: \b(s[3e]x+|s[3e]ks+|ngent[o0]t+|ewe|ewean|ent[o0]t+|coli|colmek|masturb(asi)?|ngewe|hentai|porn+|bokep+|xnxx|xvideos|intercourse)\b
+Weight: 2.0
+Examples: sex, seks, s3x, ngentot, porn, bokep, hentai, xnxx
+
+--- genitals ---
+Pattern: \b(kontol+|memek+|pepek+|titit+|penis|vagina|pussy|dick|cock|boobs+|tetek+|tete+|payudara|g[-\s]*spot|gspot)\b
+Weight: 1.7
+Examples: kontol, memek, penis, vagina, pussy, dick, boobs, g-spot
+
+--- nudity ---
+Pattern: \b(telanjang|bugil+|nude+|naked)\b
+Weight: 1.2
+Examples: telanjang, bugil, nude, naked
+
+--- suggestive_content ---
+Pattern: \b(dirty|hot|seksi|sexy|mesum|nakal|kotor)\b
+Weight: 0.9
+Examples: dirty, hot, seksi, sexy, mesum, nakal, kotor
+
+--- adult_content ---
+Pattern: \b(dewasa|adult)\b
+Weight: 1.0
+Examples: dewasa, adult
+
+--- request_media ---
+Pattern: \b(kirim(in)?|send|share)\s*(foto|video)?\s*(bugil|nude|telanjang)\b
+Weight: 1.5
+Examples: kirim nude, send nude, share foto bugil
+
+--- invitation ---
+Pattern: \b(ml|make\s*love|sange|horny|sangean|main\s*yuk|ayo\s*(sex|seks)|ngamar|ons|hookup)\b
+Weight: 1.4
+Examples: ml, make love, sange, horny, main yuk, ngamar, ons
+
+--- escort_terms ---
+Pattern: \b(open\s*bo|open\s*booking|booking|avail|short\s*time|long\s*time|st|lt|pijat\s*plusplus|plus\s*plus)\b
+Weight: 1.6
+Examples: open bo, booking, short time, pijat plusplus
+
+========================================
+CATEGORY: MODUS (Grooming/Transaction)
+========================================
+
+--- ask_contact ---
+Pattern: \b(minta|boleh|kasih|drop|ada)\s*(nomor|no\.?|wa|kontak|telegram|tele|line|ig)\b|\b(kontak)\s*(lain|luar|lainnya)?\b
+Weight: 1.1
+Examples: minta nomor, boleh wa, kontak lain
+
+--- move_off_platform ---
+Pattern: \b(pindah|lanjut)\s*(wa|whatsapp|tele|telegram|line|ig|instagram|dm|vc|video\s*call|call|gmeet)\b
+Weight: 1.2
+Examples: pindah wa, lanjut telegram, video call
+
+--- platform_standalone ---
+Pattern: \b(telegram|tele|line|gmeet|whatsapp|wa)\b
+Weight: 0.8
+Examples: telegram, line, whatsapp, wa
+
+--- obfuscated_platform ---
+Pattern: \b(te\.?le(\.?gram)?|li\.?ne|wa\.?ha?ts?app?|w\.?a\.?|t\.?e\.?l\.?e\.?g\.?r\.?a\.?m|i\.?g|i\.?n\.?s\.?t\.?a\.?g\.?r\.?a\.?m)\b
+Weight: 0.7
+Examples: T.e.l.e, L.i.n.e, W.A
+
+--- meetup ---
+Pattern: \b(ketemu|meet|ngopi|jalan|hangout|main)\s*(yuk|ayo)?\b
+Weight: 0.9
+Examples: ketemu yuk, meet up, ngopi, jalan-jalan
+
+--- hotel_room ---
+Pattern: \b(hotel|kamar|kosan|apart|apartemen|nginep)\b
+Weight: 0.9
+Examples: hotel, kamar, kosan, apartemen, nginep
+
+--- rates_money ---
+Pattern: \b(per\s*jam(nya)?|perjam(nya)?|per\s*malam(nya)?|permalam(nya)?|tarif|rate|bayar|fee|jasa|transfer|tf|gopay|dana|ovo|rekening)\b
+Weight: 1.3
+Examples: per jam, perjamnya, tarif, rate, bayar, transfer
+
+--- coercion ---
+Pattern: \b(asal\s*kamu|kalau\s*kamu\s*mau|tenang\s*aja|gak\s*usah\s*takut|percaya\s*sama\s*aku|rahasia|jangan\s*bilang\s*siapa|bisa\s*diatur|diatur|pengen)\b
+Weight: 0.9
+Examples: asal kamu, tenang aja, bisa diatur, pengen
+
+--- age_probe ---
+Pattern: \b(umur|usia)\s*\d{1,2}\b|\b(kelas|smp|smk|sma)\b
+Weight: 0.8
+Examples: umur 15, usia 17, kelas 10, smp, sma
+
+========================================
+CATEGORY: HARASSMENT
+========================================
+
+--- insults ---
+Pattern: \b(anjing|bangsat|kontol|memek|bego|tolol|goblok|brengsek|ngentod|asu|kampret)\b
+Weight: 1.5
+Examples: anjing, bangsat, bego, tolol, asu, kampret
+
+--- threats ---
+Pattern: \b(gua\s*bunuh|tak\s*bunuh|mati\s*aja|hajar|gebuk|bacok|tembak|laporin|sebar(in)?)\b
+Weight: 1.4
+Examples: gua bunuh, mati aja, hajar, gebuk, laporin
+
+--- sexual_harass_combo ---
+Pattern: \b(kontol|memek|tetek|bugil|nude)\b.*\b(kamu|lu|elo)\b|\b(kamu|lu|elo)\b.*\b(kontol|memek|tetek|bugil|nude)\b
+Weight: 1.2
+Examples: kontol kamu, kamu memek, lu bugil
+
+========================================
+CATEGORY: SCAM
+========================================
+
+--- phishing ---
+Pattern: \b(otp|kode\s*verifikasi|verification\s*code|pin)\b.*\b(kirim|send|share|kasih)\b|\b(kirim|send|share|kasih)\b.*\b(otp|pin)\b
+Weight: 2.0
+Examples: otp nya berapa, kirim otp, kode verifikasi
+
+--- fraud_keywords ---
+Pattern: \b(hadiah|menang|undian|saldo|top\s*up|invest|deposit|withdraw|wd|cuan|profit)\b
+Weight: 1.1
+Examples: hadiah, menang, undian, saldo, invest, cuan
+
+--- suspicious_links ---
+Pattern: \b(https?://|www\.)\S+\b
+Weight: 0.7
+Examples: https://example.com, www.example.com
+
+--- impersonation ---
+Pattern: \b(cs|customer\s*service|admin|official)\b.*\b(verifikasi|akun|suspend|blokir)\b
+Weight: 1.2
+Examples: cs verifikasi, admin suspend, official blokir
+
+========================================
+SCORING SYSTEM
+========================================
+
+Thresholds:
+- sexual: 60
+- modus: 60
+- harassment: 65
+- scam: 65
+
+Score Calculation:
+- Uses logistic score: 100 * (weight_sum / (weight_sum + 1.25))
+- Flag = score >= threshold
+
+Normalization:
+- Unicode normalization (NFKD)
+- Lowercase conversion
+- Leet speak substitution (0->o, 1->i, 3->e, @->a, $->s, etc)
+- Remove separators between single characters (obfuscation handling)
+- Preserve spaces between words
+

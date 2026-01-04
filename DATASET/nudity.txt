@@ -1,0 +1,19 @@
+# nudity.txt
+# Pattern untuk deteksi konten telanjang/nude
+
+REGEX_PATTERN:
+\b(telanjang|bugil+|nude+|naked)\b
+
+WEIGHT: 1.2
+
+DESCRIPTION:
+Detects nudity-related terms
+
+EXAMPLES:
+- telanjang
+- bugil
+- bugill
+- nude
+- nudee
+- naked
+

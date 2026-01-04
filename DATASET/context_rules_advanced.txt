@@ -1,0 +1,159 @@
+# context_rules_advanced.txt
+# Advanced Context Rules Documentation
+
+## Rules Baru yang Ditambahkan
+
+### 11. KONTOL/MEMEK + KAMU/LU/ELO (Harassment Boost)
+```
+IF pattern = "kontol|memek|tetek|bugil|nude"
+AND AFTER = "kamu|lu|elo|kau|anda"
+THEN:
+  - weight_adjust = +0.3
+  - should_flag = True
+  
+Examples:
+- kontol kamu
+- memek lu
+- tetek elo
+- bugil kamu
+- nude lu
+```
+
+### 12. BOOKING/OPEN BO + PER JAM/TARIF (Transactional Boost)
+```
+IF pattern = "booking|open bo|avail"
+AND BEFORE = "per jam|tarif|rate|bayar"
+THEN:
+  - weight_adjust = +0.2
+  - should_flag = True
+  
+Examples:
+- booking per jam
+- open bo tarif
+- avail rate
+```
+
+### 13. PER JAM/PER MALAM + ANGKA/JUTA (Transactional Boost)
+```
+IF pattern = "per jam|per malam|perjam|permalam"
+AND AFTER = "angka|juta|rb|ribu|jt"
+THEN:
+  - weight_adjust = +0.2
+  - should_flag = True
+  
+Examples:
+- per jam 500rb
+- per malam 2 juta
+- perjam 1jt
+- permalam 15 juta
+```
+
+### 14. KETEMU/MEET + HOTEL/KAMAR (Meetup Boost)
+```
+IF pattern = "ketemu|meet|ngopi|jalan"
+AND AFTER = "hotel|kamar|kosan|apartemen"
+THEN:
+  - weight_adjust = +0.2
+  - should_flag = True
+  
+Examples:
+- ketemu hotel
+- meet kamar
+- ngopi apartemen
+- jalan kosan
+```
+
+### 15. OTP/PIN + KIRIM/SEND (Phishing Boost)
+```
+IF pattern = "otp|pin|kode verifikasi"
+AND BEFORE/AFTER = "kirim|send|share|kasih|minta"
+THEN:
+  - weight_adjust = +0.4
+  - should_flag = True
+  
+Examples:
+- otp kirim
+- kirim otp
+- pin send
+- send pin
+- kode verifikasi kirim
+```
+
+### 16. HADIAH/MENANG + TRANSFER/BAYAR (Scam Boost)
+```
+IF pattern = "hadiah|menang|undian"
+AND AFTER = "transfer|bayar|kirim uang|transfer duit"
+THEN:
+  - weight_adjust = +0.3
+  - should_flag = True
+  
+Examples:
+- hadiah transfer
+- menang bayar
+- undian kirim uang
+```
+
+### 17. CS/ADMIN + VERIFIKASI/SUSPEND (Impersonation Boost)
+```
+IF pattern = "cs|customer service|admin|official"
+AND AFTER = "verifikasi|akun|suspend|blokir"
+THEN:
+  - weight_adjust = +0.3
+  - should_flag = True
+  
+Examples:
+- cs verifikasi
+- admin suspend
+- customer service blokir
+- official verifikasi akun
+```
+
+### 18. GAK/ENGGAK + SEX/NGENTOT (Negation Exclude)
+```
+IF pattern = "sex|seks|ngentot|entot"
+AND BEFORE = "gak|enggak|tak|tidak|no|jangan"
+THEN:
+  - weight_adjust = -0.5
+  - should_flag = False
+  
+Examples yang TIDAK akan di-flag:
+- gak sex
+- enggak ngentot
+- tak mau sex
+- tidak pengen seks
+- jangan sex
+```
+
+### 19. GAK/ENGGAK + KIRIM/SEND NUDE (Negation Exclude)
+```
+IF pattern = "nude|bugil|telanjang"
+AND BEFORE = "gak|enggak|tak|tidak|no|jangan" + "kirim|send|minta|kasih"
+THEN:
+  - weight_adjust = -0.5
+  - should_flag = False
+  
+Examples yang TIDAK akan di-flag:
+- jangan kirim nude
+- gak send foto bugil
+- enggak minta nude
+- tak kasih foto telanjang
+```
+
+## Summary
+
+Total Context Rules: 19 rules
+
+Kategori:
+- Boost Rules (increase weight): 12 rules
+- Exclude Rules (decrease weight/skip): 7 rules
+
+Fitur:
+- Context before checking
+- Context after checking
+- Exclude before checking
+- Exclude after checking
+- Negation handling
+- Transactional pattern detection
+- Harassment pattern detection
+- Scam/phishing pattern detection
+

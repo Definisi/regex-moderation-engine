@@ -1,0 +1,16 @@
+# suspicious_links.txt
+# Pattern untuk deteksi link mencurigakan
+
+REGEX_PATTERN:
+\b(https?://|www\.)\S+\b
+
+WEIGHT: 0.7
+
+DESCRIPTION:
+Detects suspicious links/URLs
+
+EXAMPLES:
+- https://example.com
+- http://example.com
+- www.example.com
+

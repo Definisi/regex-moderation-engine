@@ -1,0 +1,157 @@
+# SUMMARY.txt
+# Comprehensive Summary of Moderation Engine
+
+## System Overview
+
+Regex-only chat moderation scorer dengan semi-LLM context checking system.
+Multi-label detection: sexual, modus (grooming/transactional), harassment, scam.
+
+## File Structure
+
+### Core Files
+- `normalize.py` - Text normalization dengan leet speak & obfuscation handling
+- `rules.py` - Pattern rules untuk semua kategori (23 pattern rules)
+- `scorer.py` - Scoring engine dengan context checker integration
+- `context_checker.py` - Semi-LLM rule-based context checking (33 context rules)
+- `index.py` - Main entry point dengan 500+ test cases
+
+### Dataset Files (28 files)
+- 23 pattern category files
+- 3 context documentation files
+- 1 README.md
+- 1 SUMMARY.txt (this file)
+
+## Statistics
+
+### Pattern Rules
+- Sexual: 10 rules
+- Modus: 9 rules
+- Harassment: 3 rules
+- Scam: 4 rules
+- **Total: 26 pattern rules**
+
+### Context Rules
+- Boost rules: 20 rules
+- Exclude rules: 13 rules
+- **Total: 33 context rules**
+
+### Test Cases
+- Basic patterns: ~100 cases
+- Obfuscation variations: ~150 cases
+- Context-aware cases: ~150 cases
+- Complex combinations: ~100 cases
+- **Total: ~500+ test cases**
+
+## Features
+
+### 1. Normalization
+- Unicode normalization (NFKD)
+- Leet speak substitution (0->o, 1->i, 3->e, @->a, $->s)
+- Obfuscation handling (s e x -> sex, T.e.l.e -> tele)
+- Preserve word boundaries
+
+### 2. Pattern Matching
+- Word boundary matching (\b)
+- Case-insensitive (re.I)
+- Repeated characters (sex+, kontol+)
+- Leet speak variations (s[3e]x, ngent[o0]t)
+
+### 3. Context Checking
+- Context before checking
+- Context after checking
+- Exclude before/after
+- Weight adjustment
+- Negation handling
+
+### 4. Scoring
+- Logistic score: 100 * (weight / (weight + 1.25))
+- Threshold-based flagging
+- Multi-label scoring
+- Overall risk score
+
+## Detection Categories
+
+### Sexual Content
+- Explicit acts (sex, ngentot, porn, bokep, etc)
+- Genitals (kontol, memek, penis, vagina, etc)
+- Nudity (nude, bugil, telanjang)
+- Suggestive content (dirty, hot, seksi, etc)
+- Adult content (dewasa, adult)
+- Request media (kirim nude, send foto bugil)
+- Invitation (ml, sange, horny, etc)
+- Escort terms (open bo, booking, short time, etc)
+
+### Modus (Grooming/Transaction)
+- Move off platform (pindah wa, lanjut telegram)
+- Platform standalone (telegram, line, whatsapp)
+- Obfuscated platform (T.e.l.e, L.i.n.e)
+- Ask contact (minta nomor, kontak lain)
+- Meetup (ketemu yuk, meet up)
+- Hotel/room (hotel, kamar, apartemen)
+- Rates/money (per jam, tarif, bayar, transfer)
+- Coercion (asal kamu, bisa diatur, pengen)
+- Age probe (umur 15, kelas 10, smp)
+
+### Harassment
+- Insults (anjing, bangsat, bego, asu, etc)
+- Threats (gua bunuh, mati aja, hajar, etc)
+- Sexual harass combo (kontol kamu, memek lu)
+
+### Scam
+- Phishing (otp kirim, kode verifikasi)
+- Fraud keywords (hadiah, menang, undian, invest)
+- Suspicious links (https://, www.)
+- Impersonation (cs verifikasi, admin suspend)
+
+## Context Rules Highlights
+
+### Exclude Rules (False Positive Reduction)
+- nude + art/photography -> exclude
+- sex + education/health -> exclude
+- adult + education -> exclude
+- masturb + education/health -> exclude
+- intercourse + sexual (medical) -> exclude
+- gak/enggak + sex/nude -> exclude
+
+### Boost Rules (True Positive Enhancement)
+- nude + kirim/send -> boost
+- sex + mau/pengen -> boost
+- adult + content/only -> boost
+- platform + pindah/lanjut -> boost
+- money + bayar/transfer -> boost
+- contact + minta/boleh -> boost
+- hotel + ketemu/meet -> boost
+- otp/pin + kirim/send -> boost
+- hadiah + transfer/bayar -> boost
+- cs/admin + verifikasi/suspend -> boost
+- kontol/memek + kamu/lu -> boost
+
+## Performance
+
+- Total rules: 62 (26 pattern + 36 context)
+- Test cases: 500+
+- Output lines: 3700+
+- Context window: 50 characters
+- Thresholds: sexual=60, modus=60, harassment=65, scam=65
+
+## Usage
+
+```python
+from scorer import RegexModerationScorer
+
+scorer = RegexModerationScorer()
+result = scorer.score("kirim nude dong")
+
+print(result["labels"]["sexual"]["score"])  # Score 0-100
+print(result["labels"]["sexual"]["flag"])   # True/False
+print(result["labels"]["sexual"]["hits"])   # Matched rules
+```
+
+## Notes
+
+- Pure regex-based, no ML dependencies
+- Tune patterns + weights using your own dataset
+- Context checking improves accuracy significantly
+- Normalization handles most obfuscation attempts
+- System is extensible - add more rules as needed
+

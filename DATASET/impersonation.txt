@@ -1,0 +1,17 @@
+# impersonation.txt
+# Pattern untuk deteksi impersonation (pura-pura CS/admin)
+
+REGEX_PATTERN:
+\b(cs|customer\s*service|admin|official)\b.*\b(verifikasi|akun|suspend|blokir)\b
+
+WEIGHT: 1.2
+
+DESCRIPTION:
+Detects impersonation attempts (fake customer service, admin, official)
+
+EXAMPLES:
+- cs verifikasi
+- customer service akun
+- admin suspend
+- official blokir
+

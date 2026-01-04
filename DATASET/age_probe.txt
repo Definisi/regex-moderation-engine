@@ -1,0 +1,19 @@
+# age_probe.txt
+# Pattern untuk deteksi pertanyaan umur/usia
+
+REGEX_PATTERN:
+\b(umur|usia)\s*\d{1,2}\b|\b(kelas|smp|smk|sma)\b
+
+WEIGHT: 0.8
+
+DESCRIPTION:
+Detects age probing questions (often used in grooming)
+
+EXAMPLES:
+- umur 15
+- usia 17
+- kelas 10
+- smp
+- smk
+- sma
+

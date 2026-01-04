@@ -1,0 +1,20 @@
+# move_off_platform.txt
+# Pattern untuk deteksi ajakan pindah platform (WA, Telegram, dll)
+
+REGEX_PATTERN:
+\b(pindah|lanjut)\s*(wa|whatsapp|tele|telegram|line|ig|instagram|dm|vc|video\s*call|call|gmeet)\b
+
+WEIGHT: 1.2
+
+DESCRIPTION:
+Detects attempts to move conversation off-platform
+
+EXAMPLES:
+- pindah wa
+- lanjut telegram
+- pindah line
+- lanjut whatsapp
+- pindah ig
+- video call
+- vc
+

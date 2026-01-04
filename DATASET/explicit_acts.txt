@@ -1,0 +1,53 @@
+# explicit_acts.txt
+# Pattern untuk deteksi tindakan eksplisit/seksual
+
+REGEX_PATTERN:
+\b(s[3e]x+|s[3e]ks+|ngent[o0]t+|ewe|ewean|ent[o0]t+|coli|colmek|masturb(asi)?|ngewe|hentai|porn+|bokep+|xnxx|xvideos|intercourse)\b
+
+WEIGHT: 2.0
+
+DESCRIPTION:
+Detects explicit sexual acts and pornographic content
+
+EXAMPLES:
+- sex
+- seks
+- s3x
+- s3ks
+- ngentot
+- ngent0t
+- ewe
+- ewean
+- entot
+- ent0t
+- coli
+- colmek
+- masturbasi
+- masturb
+- ngewe
+- hentai
+- porn
+- bokep
+- xnxx
+- xvideos
+- intercourse
+
+CONTEXT EXAMPLES (must check context):
+- mau sex
+- pengen seks
+- ingin ngentot
+- mau ml
+- pengen make love
+- mau sex bareng
+- ingin ngentot sama kamu
+- pengen seks sama aku
+- mau ml dengan kamu
+- ingin intercourse
+- pengen sex nih
+- mau seks yuk
+- ingin ngentot dong
+- pengen sex aja
+- mau ml bareng
+- ingin make love sama kamu
+- pengen sex sama aku
+- mau intercourse nih

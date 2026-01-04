@@ -1,0 +1,19 @@
+# platform_standalone.txt
+# Pattern untuk deteksi mention platform komunikasi
+
+REGEX_PATTERN:
+\b(telegram|tele|line|gmeet|whatsapp|wa)\b
+
+WEIGHT: 0.8
+
+DESCRIPTION:
+Detects standalone mentions of communication platforms
+
+EXAMPLES:
+- telegram
+- tele
+- line
+- gmeet
+- whatsapp
+- wa
+

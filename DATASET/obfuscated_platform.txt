@@ -1,0 +1,20 @@
+# obfuscated_platform.txt
+# Pattern untuk deteksi platform yang di-obfuscate (T.e.l.e, L.i.n.e, dll)
+
+REGEX_PATTERN:
+\b(te\.?le(\.?gram)?|li\.?ne|wa\.?ha?ts?app?|w\.?a\.?|t\.?e\.?l\.?e\.?g\.?r\.?a\.?m|i\.?g|i\.?n\.?s\.?t\.?a\.?g\.?r\.?a\.?m)\b
+
+WEIGHT: 0.7
+
+DESCRIPTION:
+Detects obfuscated platform names (with dots, spacing, etc)
+
+EXAMPLES:
+- t.e.l.e
+- T.e.l.e.g.r.a.m
+- l.i.n.e
+- w.a
+- wa.ts.app
+- i.g
+- instagram
+

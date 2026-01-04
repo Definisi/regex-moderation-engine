@@ -1,0 +1,24 @@
+# fraud_keywords.txt
+# Pattern untuk deteksi kata kunci fraud/scam
+
+REGEX_PATTERN:
+\b(hadiah|menang|undian|saldo|top\s*up|invest|deposit|withdraw|wd|cuan|profit)\b
+
+WEIGHT: 1.1
+
+DESCRIPTION:
+Detects fraud/scam keywords
+
+EXAMPLES:
+- hadiah
+- menang
+- undian
+- saldo
+- top up
+- invest
+- deposit
+- withdraw
+- wd
+- cuan
+- profit
+

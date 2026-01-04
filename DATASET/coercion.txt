@@ -1,0 +1,23 @@
+# coercion.txt
+# Pattern untuk deteksi manipulasi/coercion
+
+REGEX_PATTERN:
+\b(asal\s*kamu|kalau\s*kamu\s*mau|tenang\s*aja|gak\s*usah\s*takut|percaya\s*sama\s*aku|rahasia|jangan\s*bilang\s*siapa|bisa\s*diatur|diatur|pengen)\b
+
+WEIGHT: 0.9
+
+DESCRIPTION:
+Detects coercive and manipulative language
+
+EXAMPLES:
+- asal kamu
+- kalau kamu mau
+- tenang aja
+- gak usah takut
+- percaya sama aku
+- rahasia
+- jangan bilang siapa
+- bisa diatur
+- diatur
+- pengen
+

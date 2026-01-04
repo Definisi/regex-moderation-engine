@@ -1,0 +1,15 @@
+# adult_content.txt
+# Pattern untuk deteksi konten dewasa
+
+REGEX_PATTERN:
+\b(dewasa|adult)\b
+
+WEIGHT: 1.0
+
+DESCRIPTION:
+Detects adult content references
+
+EXAMPLES:
+- dewasa
+- adult
+
